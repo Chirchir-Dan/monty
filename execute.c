@@ -1,11 +1,13 @@
 #include "monty.h"
 
 
+
 /**
  * execute_file - Executes bytecode instructions from a file
  * @filename: Name of the file containing bytecode instructions
  */
-void execute_file(const char *filename) {
+void execute_file(const char *filename)
+{
 	FILE *file;
 	char line[MAX_LINE_LENGTH];
 	stack_t *stack = NULL;
@@ -13,12 +15,13 @@ void execute_file(const char *filename) {
 	int value;
 	unsigned int line_number = 0;
 
+
 	file = fopen(filename, "r");
-	if (file == NULL) {
+	if (file == NULL)
+	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
@@ -29,22 +32,20 @@ void execute_file(const char *filename) {
 		{
 			continue; /* Ignore empty lines or comments */
 		}
-
 		if (strcmp(opcode, "push") == 0)
 		{
 			value = atoi(arg);
 			push(&stack, value);
 		}
 		else if (strcmp(opcode, "pall") == 0)
-		{
 			pall(&stack);
-		}
+		else if (strcmp(opcode, "pint") == 0)
+			pint(&stack, line_number);
 		else
 		{
-			fprintf(stderr, "L%d: Unknown instruction %s\n",line_number, opcode);
+			fprintf(stderr, "L%d: Unknown instruction %s\n", line_number, opcode);
 			exit(EXIT_FAILURE);
 		}
 	}
-
 	fclose(file);
 }

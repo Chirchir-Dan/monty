@@ -5,10 +5,13 @@
  * @stack: Pointer to the top of the stack
  * @value: Value to push onto the stack
  */
-void push(stack_t **stack, int value) {
+void push(stack_t **stack, int value)
+{
 	stack_t *new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL) {
-		fprintf(stderr, "Error: Memory allocation failed\n");
+
+	if (new_node == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -16,7 +19,8 @@ void push(stack_t **stack, int value) {
 	new_node->prev = NULL;
 	new_node->next = *stack;
 
-	if (*stack != NULL) {
+	if (*stack != NULL)
+	{
 		(*stack)->prev = new_node;
 	}
 
@@ -26,13 +30,14 @@ void push(stack_t **stack, int value) {
 /**
  * pall - Prints all elements of the stack
  * @stack: Pointer to the top of the stack
- * @line_number: Line number of the instruction
  */
-void pall(stack_t **stack) {
+void pall(stack_t **stack)
+{
 	stack_t *current = *stack;
-	while (current != NULL) {
+
+	while (current != NULL)
+	{
 		printf("%d\n", current->n);
 		current = current->next;
 	}
 }
-

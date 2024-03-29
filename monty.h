@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define MAX_LINE_LENGTH 1000
 /**
@@ -40,5 +41,6 @@ typedef struct instruction_s
 void push(stack_t **stack, int value);
 void pall(stack_t **stack);
 void execute_file(const char *filename);
+void pint(stack_t **stack, unsigned int line_number);
 
 #endif /* OPCODES_H */
