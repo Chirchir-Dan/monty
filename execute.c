@@ -1,4 +1,4 @@
-#include "opcodes.h"
+#include "monty.h"
 
 
 /**
@@ -40,7 +40,7 @@ void execute_file(const char *filename) {
 		}
 		else if (strcmp(opcode, "pall") == 0)
 		{
-			pall(&stack, 0);
+			pall(&stack);
 		}
 		else
 		{

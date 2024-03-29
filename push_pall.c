@@ -1,4 +1,4 @@
-#include "opcodes.h"
+#include "monty.h"
 
 /**
  * push - Pushes an integer onto the stack
@@ -28,9 +28,8 @@ void push(stack_t **stack, int value) {
  * @stack: Pointer to the top of the stack
  * @line_number: Line number of the instruction
  */
-void pall(stack_t **stack, unsigned int line_number) {
+void pall(stack_t **stack) {
 	stack_t *current = *stack;
-	printf("Printing all elements of the stack at line %u:\n", line_number);
 	while (current != NULL) {
 		printf("%d\n", current->n);
 		current = current->next;
