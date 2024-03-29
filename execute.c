@@ -11,15 +11,17 @@ void execute_file(const char *filename) {
 	stack_t *stack = NULL;
 	char *opcode, *arg;
 	int value;
+	unsigned int line_number = 0;
 
 	file = fopen(filename, "r");
 	if (file == NULL) {
-		fprintf(stderr, "Error: Unable to open file %s\n", filename);
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
+		line_number++;
 		opcode = strtok(line, " \t\n");
 		arg = strtok(NULL, " \t\n");
 
@@ -30,11 +32,6 @@ void execute_file(const char *filename) {
 
 		if (strcmp(opcode, "push") == 0)
 		{
-			if (arg == NULL)
-			{
-				fprintf(stderr, "Error: Missing argument for push\n");
-				exit(EXIT_FAILURE);
-			}
 			value = atoi(arg);
 			push(&stack, value);
 		}
@@ -44,7 +41,7 @@ void execute_file(const char *filename) {
 		}
 		else
 		{
-			fprintf(stderr, "Error: Unknown opcode %s\n", opcode);
+			fprintf(stderr, "L%d: Unknown instruction %s\n",line_number, opcode);
 			exit(EXIT_FAILURE);
 		}
 	}
